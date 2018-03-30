@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>Tits Blog</title>
+  <%= stylesheet_link_tag    'application.css', media: 'all', 'data-turbolinks-track': 'reload' %>
+  <%= javascript_include_tag 'application.js', 'data-turbolinks-track': 'reload' %>
+</head>
+
+<body>
+
+
+<!-- Fixed navbar -->
+<nav class="navbar navbar-inverse navbar-fixed-top">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <!--<a class="navbar-brand" href="#">Титин блог</a>-->
+      <%= link_to 'Титин блог', welcome_index_path, class: 'navbar-brand' %>
+    </div>
+
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li class="active"><%= link_to 'Главная', welcome_index_path %></li>
+        <li><%= link_to 'Статьи', articles_path %></li>
+        <li><a href="#about">Обо мне</a></li>
+      </ul>
+
+      <ul class="nav navbar-nav navbar-right">
+          <!--<a href="lo">Войти</a>-->
+          <% if admin_signed_in? %>
+          <li class="text-white">Приветствую тебя, <strong><%= current_admin.email %></strong></li>
+          <li><%= link_to 'Выход', destroy_admin_session_path, method: :delete %></li>
+          <% else %>
+          <li><%= link_to 'Войти', new_admin_session_path %></li>
+          <li><%= link_to 'Регистрация', new_admin_registration_path %></li>
+          <% end %>
+        <!--<li><a href="#">Регистрация</a></li>-->
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div>
+</nav>
+
+<div class="container theme-showcase" role="main">
+
+  <!-- Main jumbotron for a primary marketing message or call to action -->
+  <div class="jumbotron">
+    <h1>Добро пожаловать</h1>
+    <p>Этот блог создан 20 марта 2018 года</p>
+  </div>
+
+  <ol class="breadcrumb">
+    <li><a href="#">Home</a></li>
+    <li><a href="#">Library</a></li>
+    <li class="active">Data</li>
+  </ol>
+
+  <!--
+  <div class="page-header">
+    <h1>Статьи</h1>
+  </div>
+  -->
+
+  <%= yield %>
+
+
+<!--
+<%= yield :head %>
+-->
+
+    <br><br>
+  <hr>
+
+  <footer>
+    <p>&copy; 2018</p>
+  </footer>
+</div>
+
+</div> <!-- /container -->
+
+
+<!-- Bootstrap core JavaScript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+</body>
+</html>

@@ -1,0 +1,43 @@
+<%= simple_form_for :search, url: currencies_path, method: :get do |f| %>
+  <%= f.input :date, as: :date, selected: Date.parse(@date_civil) %>
+  <%= f.button :button %>
+<% end %>
+
+<h1><%= @date_civil %></h1>
+
+<!--<div class="col-lg-6">
+  <div class="input-group">
+    <input type="date" class="form-control" placeholder="ДД.ММ.ГГГГ">
+    <span class="input-group-btn">
+        <button class="btn btn-default" type="button">Ввод</button>
+      </span>
+  </div>&lt;!&ndash; /input-group &ndash;&gt;
+</div>--><!-- /.col-lg-6 -->
+
+<br><br><br>
+
+<h3>Центральный банк Российской Федерации установил с 24.03.2018 следующие курсы иностранных валют к рублю Российской Федерации без обязательств Банка России покупать или продавать указанные валюты по данному курсу
+</h3>
+
+<div class="row">
+  <div class="col-md-9">
+    <table class="table">
+      <tbody>
+      <tr>
+        <th>Цифр. код</th><th>Букв. код</th><th>Единиц</th><th>Валюта</th><th>Курс</th><th></th></tr>
+      <% unless @result.blank? %>
+        <% @result.each do |currency| %>
+          <tr>
+            <td><%= currency.numCode %></td>
+            <td><%= currency.charCode %></td>
+            <td><%= currency.nominal %></td>
+            <td><%= currency.name.encode("utf-8", undef: :replace) %></td>
+            <td><%= currency.value %></td>
+            <td><%= link_to 'Посчитать', currency_path(currency) %></td>
+          </tr>
+        <% end %>
+      <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
